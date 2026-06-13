@@ -1,0 +1,14 @@
+{
+  "name": "clubparty-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.1",
+    "discord.js": "^14.26.4",
+    "dotenv": "^16.6.1"
+  }
+}
