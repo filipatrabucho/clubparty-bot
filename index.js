@@ -1,6 +1,9 @@
+import ws from 'ws';
 import { Client, GatewayIntentBits, Events } from 'discord.js';
 import { createClient } from '@supabase/supabase-js';
 import 'dotenv/config';
+
+globalThis.WebSocket = ws;
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SECRET_KEY);
 
