@@ -131,3 +131,31 @@ client.on(Events.MessageCreate, async (message) => {
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
+
+const WELCOME_CHANNEL_ID = process.env.WELCOME_CHANNEL_ID;
+
+client.on(Events.GuildMemberAdd, async (member) => {
+  if (!WELCOME_CHANNEL_ID) return;
+
+  const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
+  if (!channel) return;
+
+  try {
+    await channel.send({
+      content: `${member}`, // menção fora do embed para notificar a pessoa
+      embeds: [{
+        title: `🎉 Bem-vindo(a) ao ${member.guild.name}!`,
+        description:
+          `Olá ${member.user.username}, que bom ter-te aqui!\n\n` +
+          `📜 Lê as regras em <#942098381982040084>\n` +
+          `💬 Apresenta-te em <#932666031867056258>\n` +
+          `🎮 Diverte-te e participa na comunidade!`,
+        color: 0xD65A7E, // cor da marca Club Party
+        thumbnail: { url: member.user.displayAvatarURL() },
+        footer: { text: `Agora somos ${member.guild.memberCount} membros!` },
+      }],
+    });
+  } catch (err) {
+    console.error('Erro ao enviar mensagem de boas-vindas:', err);
+  }
+});
